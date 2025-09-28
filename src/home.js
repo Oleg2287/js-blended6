@@ -23,8 +23,9 @@ getProductCategories();
 function renderCategoriesMarkup(arr) {
   const markup = arr.map(
       (element) =>
-        `<li class="category-item">
-      <button class="category-btn" type="button">${element}</button>
+    
+        `<li class="categories__item">
+      <button class="categories__btn" type="button">${element}</button>
   </li>`
     )
     .join("");
@@ -42,6 +43,16 @@ async function renderCategories() {
 }
 
 renderCategories();
+
+async function getProducts(currentPage = 1 ) {
+    try {
+    const response = await axios.get(`/products?limit=12&skip=${(currentPage - 1) * 12}`);
+    return response.data.products;
+} catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+}
+}
 
 // Приклади інших запитів:
 

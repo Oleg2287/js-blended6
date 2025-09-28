@@ -1,0 +1,1 @@
+export const productsList = document.querySelector(".products-list");
