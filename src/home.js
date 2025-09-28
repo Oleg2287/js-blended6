@@ -9,8 +9,13 @@ axios.defaults.baseURL = "https://dummyjson.com"; // Встановлення б
 const categoriesList = document.querySelector(".categories");
 
 async function getProductCategories() {
+    try {
   const response = await axios.get("/products/category-list");
   return response.data;
+} catch (error) {
+    console.error("Error fetching product categories:", error);
+    return [];
+  }
 }
 
 getProductCategories();
@@ -27,9 +32,13 @@ function renderCategoriesMarkup(arr) {
 }
 
 async function renderCategories() {
+  try {  
     const categories = await getProductCategories();
     const allCategories = ["All", ...categories];
     renderCategoriesMarkup(allCategories);
+  } catch (error) {
+    console.error("Error rendering categories:", error);
+  }
 }
 
 renderCategories();
